@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuxConnect - Alumni Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/font/lucide.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>NeuxConnect</h2>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <div class="nav-guest" id="navGuest">
+                    <button class="btn btn--outline" onclick="showLogin()">Login</button>
+                    <button class="btn btn--primary" onclick="showRegister()">Register</button>
+                </div>
+                <div class="nav-user hidden" id="navUser">
+                    <div class="search-container">
+                        <input type="text" class="search-input" id="globalSearch" placeholder="Search alumni, events, jobs...">
+                        <i class="lucide-search search-icon"></i>
+                    </div>
+                    <div class="user-profile">
+                        <img id="navUserAvatar" class="user-avatar" alt="User Avatar">
+                        <span id="navUserName"></span>
+                        <button class="btn btn--outline btn--sm" onclick="logout()">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Landing Page -->
+    <main id="landingPage" class="landing-page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Connect, Grow, Give Back</h1>
+                        <p class="hero-subtitle">The ultimate platform connecting alumni, students, faculty, and employers in one powerful ecosystem</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn--primary btn--lg" onclick="showRegister()">Join NeuxConnect</button>
+                            <button class="btn btn--outline btn--lg" onclick="showLogin()">Sign In</button>
+                        </div>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">5,420</div>
+                            <div class="stat-label">Alumni Connected</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">2,340</div>
+                            <div class="stat-label">Active Students</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">$234K</div>
+                            <div class="stat-label">Total Donations</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">89</div>
+                            <div class="stat-label">Mentorship Matches</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2>Everything You Need in One Platform</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="lucide-users"></i>
+                        </div>
+                        <h3>Smart Networking</h3>
+                        <p>Connect with alumni, students, and faculty through AI-powered matching and advanced search capabilities</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="lucide-briefcase"></i>
+                        </div>
+                        <h3>Career Opportunities</h3>
+                        <p>Access exclusive job postings, internships, and career guidance from industry professionals</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="lucide-graduation-cap"></i>
+                        </div>
+                        <h3>Mentorship Program</h3>
+                        <p>Get paired with experienced mentors or become one yourself to guide the next generation</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="lucide-calendar"></i>
+                        </div>
+                        <h3>Events & Reunions</h3>
+                        <p>Stay updated with alumni events, workshops, and networking opportunities in your area</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="lucide-heart"></i>
+                        </div>
+                        <h3>Give Back</h3>
+                        <p>Support your alma mater through secure donation campaigns and scholarship programs</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="lucide-bar-chart"></i>
+                        </div>
+                        <h3>Analytics & Insights</h3>
+                        <p>Track your network growth, career progress, and institutional engagement metrics</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials">
+            <div class="container">
+                <h2>Success Stories</h2>
+                <div class="testimonials-carousel" id="testimonialsCarousel">
+                    <div class="testimonial-card">
+                        <blockquote>"NeuxConnect helped me find my dream job at Google through alumni connections. The mentorship program was invaluable!"</blockquote>
+                        <cite>- Sarah Johnson, Computer Science '18</cite>
+                    </div>
+                    <div class="testimonial-card">
+                        <blockquote>"As a faculty member, I love how easy it is to connect with alumni for research collaborations and guest lectures."</blockquote>
+                        <cite>- Prof. Michael Davis, Faculty</cite>
+                    </div>
+                    <div class="testimonial-card">
+                        <blockquote>"The fundraising tools helped us exceed our scholarship fund goal by 200%. Amazing platform!"</blockquote>
+                        <cite>- Dr. Robert Wilson, Alumni Relations</cite>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Dashboard -->
+    <main id="dashboard" class="dashboard hidden">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-menu" id="sidebarMenu">
+                <!-- Menu items will be populated by JavaScript based on user role -->
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="content-header">
+                <h1 id="dashboardTitle">Dashboard</h1>
+                <div class="user-info">
+                    <img id="dashboardUserAvatar" class="user-avatar" alt="User Avatar">
+                    <div>
+                        <div id="dashboardUserName" class="user-name"></div>
+                        <div id="dashboardUserRole" class="user-role"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Results -->
+            <div id="searchResults" class="search-results hidden">
+                <div class="search-header">
+                    <h2>Search Results</h2>
+                    <button class="btn btn--outline btn--sm" onclick="clearSearch()">Clear</button>
+                </div>
+                <div class="search-filters">
+                    <select id="roleFilter" class="form-control" aria-label="Filter by role">
+                        <option value="">All Roles</option>
+                        <option value="Alumni">Alumni</option>
+                        <option value="Student">Student</option>
+                        <option value="Faculty">Faculty</option>
+                        <option value="Employer">Employer</option>
+                    </select>
+                    <select id="departmentFilter" class="form-control" aria-label="Filter by department">
+                        <option value="">All Departments</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Business">Business</option>
+                    </select>
+                </div>
+                <div id="searchResultsList" class="search-results-list">
+                    <!-- Search results will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Dashboard Content Sections -->
+            <div id="dashboardContent" class="dashboard-content">
+                <!-- Overview Section (Default) -->
+                <section id="overview" class="content-section">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="lucide-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="totalConnections">0</div>
+                                <div class="stat-label">Connections</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="lucide-calendar"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="upcomingEvents">0</div>
+                                <div class="stat-label">Upcoming Events</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="lucide-briefcase"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="jobOpportunities">0</div>
+                                <div class="stat-label">Job Opportunities</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="lucide-heart"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="donationsRaised">$0</div>
+                                <div class="stat-label">Donations Raised</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="charts-grid">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Engagement Analytics</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="chart-container">
+                                    <canvas id="engagementChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Network Growth</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="chart-container">
+                                    <canvas id="networkChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Events Section -->
+                <section id="events" class="content-section hidden">
+                    <div class="section-header">
+                        <h2>Events</h2>
+                        <button class="btn btn--primary" onclick="showCreateEventModal()">Create Event</button>
+                    </div>
+                    <div class="events-grid" id="eventsGrid">
+                        <!-- Events will be populated by JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Jobs Section -->
+                <section id="jobs" class="content-section hidden">
+                    <div class="section-header">
+                        <h2>Job Opportunities</h2>
+                        <button class="btn btn--primary" onclick="showCreateJobModal()">Post Job</button>
+                    </div>
+                    <div class="jobs-list" id="jobsList">
+                        <!-- Jobs will be populated by JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Mentorship Section -->
+                <section id="mentorship" class="content-section hidden">
+                    <div class="section-header">
+                        <h2>Mentorship</h2>
+                        <button class="btn btn--primary" onclick="showMentorshipModal()">Find Mentor</button>
+                    </div>
+                    <div class="mentorship-content" id="mentorshipContent">
+                        <!-- Mentorship content will be populated by JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Fundraising Section -->
+                <section id="fundraising" class="content-section hidden">
+                    <div class="section-header">
+                        <h2>Fundraising Campaigns</h2>
+                        <button class="btn btn--primary" onclick="showDonateModal()">Make Donation</button>
+                    </div>
+                    <div class="campaigns-grid" id="campaignsGrid">
+                        <!-- Campaigns will be populated by JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Profile Section -->
+                <section id="profile" class="content-section hidden">
+                    <div class="section-header">
+                        <h2>My Profile</h2>
+                        <button class="btn btn--primary" onclick="editProfile()">Edit Profile</button>
+                    </div>
+                    <div class="profile-content" id="profileContent">
+                        <!-- Profile content will be populated by JavaScript -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal hidden">
+        <div class="modal-content">
+                        <div class="modal-header">
+                <h3>Sign In to NeuxConnect</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label" for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Sign In</button>
+                </form>
+                <div class="demo-accounts">
+                    <p>Demo Accounts (click to login):</p>
+                    <div class="demo-buttons">
+                        <button class="btn btn--outline btn--sm" onclick="demoLogin('Alumni')">Alumni</button>
+                        <button class="btn btn--outline btn--sm" onclick="demoLogin('Student')">Student</button>
+                        <button class="btn btn--outline btn--sm" onclick="demoLogin('Faculty')">Faculty</button>
+                        <button class="btn btn--outline btn--sm" onclick="demoLogin('Employer')">Employer</button>
+                        <button class="btn btn--outline btn--sm" onclick="demoLogin('Admin')">Admin</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal hidden">
+        <div class="modal-content">
+                        <div class="modal-header">
+                <h3>Join NeuxConnect</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label class="form-label" for="registerRole">I am a:</label>
+                        <select id="registerRole" class="form-control" required onchange="updateRegisterFields()">
+                            <option value="">Select Role</option>
+                            <option value="Alumni">Alumni</option>
+                            <option value="Student">Student</option>
+                            <option value="Faculty">Faculty</option>
+                            <option value="Employer">Employer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="registerName">Full Name</label>
+                        <input type="text" id="registerName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="registerPassword">Password</label>
+                        <input type="password" id="registerPassword" class="form-control" required>
+                    </div>
+                    <div id="dynamicFields" class="dynamic-fields">
+                        <!-- Dynamic fields based on role selection -->
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Modal -->
+    <div id="eventModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="eventModalTitle">Event Details</h3>
+                <button class="modal-close" onclick="hideModal('eventModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="eventModalBody">
+                <!-- Event content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Modal -->
+    <div id="jobModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="jobModalTitle">Job Details</h3>
+                <button class="modal-close" onclick="hideModal('jobModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="jobModalBody">
+                <!-- Job content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Donation Modal -->
+    <div id="donateModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Make a Donation</h3>
+                <button class="modal-close" onclick="hideModal('donateModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="donateForm">
+                    <div class="form-group">
+                        <label class="form-label" for="donateAmount">Amount ($)</label>
+                        <input type="number" id="donateAmount" class="form-control" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="donateCampaign">Campaign</label>
+                        <select id="donateCampaign" class="form-control" required>
+                            <option value="">Select Campaign</option>
+                            <option value="1">New Computer Lab Fund</option>
+                            <option value="2">Scholarship Fund</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Donate Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
