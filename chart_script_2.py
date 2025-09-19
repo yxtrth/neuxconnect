@@ -95,7 +95,7 @@ for i, category_data in enumerate(data):
 
 # Update layout
 fig.update_layout(
-    title="CampusChain Growth Analytics Dashboard",
+    title="NeuxConnect Growth Analytics Dashboard",
     xaxis_title="Metrics",
     yaxis_title="Growth Rate (%)",
     barmode='group',
